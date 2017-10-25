@@ -1,7 +1,7 @@
 <?php
 $username = $_POST['username'];
 $pw = $_POST['password'];
-$con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+$con = mysqli_connect("localhost","#example","#example" , "#example");
 $sql="SELECT * FROM `Users` WHERE username = '$username'";
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result);
