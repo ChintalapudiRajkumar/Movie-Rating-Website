@@ -3,7 +3,7 @@ $mName ="";
 $mID = 0;
 if(!empty($_GET['name'])){
   $mName = $_GET['name'];
-  $con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+  $con = mysqli_connect("localhost","#example","#example" , "#example");
   $sql="SELECT M_ID FROM Movies WHERE title='$mName'";
   $result = mysqli_query($con,$sql);
   $mData = mysqli_fetch_array($result);
@@ -257,7 +257,7 @@ if(!empty($_GET['name'])){
                 <div class="thumbnail">
                     <div id="showCover">
                       <?php
-                      $con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+                      $con = mysqli_connect("localhost","#example","#example" , "#example");
                       $sql="SELECT * FROM Movies WHERE M_ID=$mmid";
                       $result = mysqli_query($con,$sql);
                       $mData = mysqli_fetch_array($result);
@@ -269,7 +269,7 @@ if(!empty($_GET['name'])){
                     <div class="caption-full" style=" clear: left;">
 
                         <?php
-                        $con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+                        $con = mysqli_connect("localhost","#example","#example" , "#example");
                         $sql="SELECT * FROM Movies WHERE M_ID=$mmid";
                         $result = mysqli_query($con,$sql);
                         $mData = mysqli_fetch_array($result);
@@ -282,7 +282,7 @@ if(!empty($_GET['name'])){
                          ?>
                         <div id="wlmsg">
                           <?php
-                          $con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+                          $con = mysqli_connect("localhost","#example","#example" , "#example");
                           $username = $_COOKIE['movierating'];
                           $sql0="SELECT * FROM Users WHERE username = '$username'";
                           $result0= mysqli_query($con,$sql0);
@@ -307,7 +307,7 @@ if(!empty($_GET['name'])){
                     <div class="ratings">
                       <ul>
                           <?php
-                          $con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+                          $con = mysqli_connect("localhost","#example","#example" , "#example");
                           $sql="SELECT * FROM Arating WHERE movie_ID = '$mmid'";
                           $result = mysqli_query($con,$sql);
                           $Arating_count = mysqli_num_rows($result);
