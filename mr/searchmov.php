@@ -172,7 +172,7 @@
                 <?php
                 if(!empty($_GET['name'])){
                 $mName = $_GET['name'];
-                $con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+                $con = mysqli_connect("localhost","#example","#example" , "#example");
                 $sql="SELECT * FROM Movies WHERE title REGEXP '[[:<:]]" . $mName . "[[:>:]]'";
                 $result = mysqli_query($con,$sql);
                 $row_num = mysqli_num_rows($result);
