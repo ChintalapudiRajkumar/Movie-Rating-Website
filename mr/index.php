@@ -205,7 +205,7 @@
                     <!-- 320*150 -->
 
                     <?php
-                    $con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+                    $con = mysqli_connect("localhost","#example","#example" , "#example");
                     $sql="SELECT * FROM Movies ORDER BY RAND() LIMIT 6";
                     $result = mysqli_query($con,$sql);
                     while($row = mysqli_fetch_array($result)){
