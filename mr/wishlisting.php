@@ -189,7 +189,7 @@
                   <p class="lead"><b>&nbsp&nbspYour Wishlist: </b></p>
                   <?php
                   $page_num = $_GET['page'];
-                  $con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+                  $con = mysqli_connect("localhost","#example","#example" , "#example");
                     $username = $_COOKIE['movierating'];
                     $sql="SELECT * FROM Movies, Wishlist, Users WHERE movie_id = M_ID
                     AND user_id = U_ID AND username = '$username'";
@@ -216,7 +216,7 @@
                 <div class="center">
                   <ul class="pagination">
                     <?php
-                    $con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+                      $con = mysqli_connect("localhost","#example","#example" , "#example");
                       $username = $_COOKIE['movierating'];
                       $sql0="SELECT * FROM Users WHERE username = '$username'";
                       $result0= mysqli_query($con,$sql0);
