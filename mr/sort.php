@@ -171,7 +171,7 @@
             $getcat = $_GET['category'];
             echo "<p class='lead'>&nbsp&nbsp" . $getcat . " Movies: </p>";
             echo "<div class='col-md-9'>";
-            $con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+            $con = mysqli_connect("localhost","#example","#example" , "#example");
                 $sql="SELECT * FROM Movies WHERE Category='$getcat'";
                 $result = mysqli_query($con,$sql);
                 $row_num = mysqli_num_rows($result);
