@@ -3,7 +3,7 @@ $mName ="";
 $mID = 0;
 if(!empty($_GET['name'])){
   $mName = $_GET['name'];
-  $con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+  $con = mysqli_connect("localhost","#example","#example" , "#example");
   $sql="SELECT M_ID FROM Movies WHERE title='$mName'";
   $result = mysqli_query($con,$sql);
   $mData = mysqli_fetch_array($result);
@@ -210,7 +210,7 @@ if(!empty($_GET['name'])){
           </div>
           <?php
           if($_SESSION['admin'] === 1){
-            $con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+          $con = mysqli_connect("localhost","#example","#example" , "#example");
           $sql="SELECT * FROM Movies WHERE M_ID=$mmid";
           $result = mysqli_query($con,$sql);
           $mData = mysqli_fetch_array($result);
