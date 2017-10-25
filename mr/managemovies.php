@@ -214,7 +214,7 @@
                   <?php
                   if($_SESSION['admin'] === 1){
                     $page_num = $_GET['page'];
-                    $con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+                    $con = mysqli_connect("localhost","#example","#example" , "#example");
                       $sql="SELECT * FROM Movies";
                       $result = mysqli_query($con,$sql);
                       $row_num = mysqli_num_rows($result);
@@ -248,7 +248,7 @@
                   <ul class="pagination">
                     <?php
                       if($_SESSION['admin'] === 1){
-                        $con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+                        $con = mysqli_connect("localhost","#example","#example" , "#example");
                       $sql="SELECT * FROM Movies";
                       $result = mysqli_query($con,$sql);
                       $row_num = mysqli_num_rows($result);
