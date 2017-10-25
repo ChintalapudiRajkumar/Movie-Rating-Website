@@ -12,7 +12,7 @@ $storyline = $_POST['storyline'];
 $mmid = $_POST['mmid'];
 // echo $year;
 
-$con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+$con = mysqli_connect("localhost","#example","#example" , "#example");
 
 
 if($mmid === ""){
