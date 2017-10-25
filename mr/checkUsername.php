@@ -3,7 +3,7 @@ $username = $_GET['username'];
 // $pw = $_GET['password'];
 // echo $pw;
 // echo $username;
-$con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+$con = mysqli_connect("localhost","#example","#example" , "#example");
 $sql="SELECT * FROM Users WHERE username='$username'";
 $result = mysqli_query($con,$sql);
 // echo mysqli_num_rows($result);
