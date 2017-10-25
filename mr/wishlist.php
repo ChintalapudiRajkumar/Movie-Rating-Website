@@ -1,6 +1,6 @@
 <?php
 $movid = intval($_GET['q']);
-$con = mysqli_connect("localhost","bluemagic_admin","heng#hao@haha!" , "bluemagic_movierating");
+$con = mysqli_connect("localhost","#example","#example" , "#example");
 $username = $_COOKIE['movierating'];
 $sql0="SELECT * FROM Users WHERE username = '$username'";
 $result0= mysqli_query($con,$sql0);
