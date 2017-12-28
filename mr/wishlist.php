@@ -1,6 +1,6 @@
 <?php
 $movid = intval($_GET['q']);
-$con = mysqli_connect("localhost","#example","#example" , "#example");
+$con = mysqli_connect("localhost","root","root" , "root");
 $username = $_COOKIE['movierating'];
 $sql0="SELECT * FROM Users WHERE username = '$username'";
 $result0= mysqli_query($con,$sql0);

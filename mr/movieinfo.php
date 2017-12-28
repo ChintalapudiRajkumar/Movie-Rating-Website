@@ -3,7 +3,7 @@ $mName ="";
 $mID = 0;
 if(!empty($_GET['name'])){
   $mName = $_GET['name'];
-  $con = mysqli_connect("localhost","#example","#example" , "#example");
+  $con = mysqli_connect("localhost","root","root" , "root");
   $sql="SELECT M_ID FROM Movies WHERE title='$mName'";
   $result = mysqli_query($con,$sql);
   $mData = mysqli_fetch_array($result);
@@ -97,6 +97,18 @@ if(!empty($_GET['name'])){
         	});
 
         });
+    </script>
+	<!-- optimized for mobile -->
+    <script>
+		$(window).on("load resize", function () {
+		  if($(window).width() < 995){
+			$('#catdesk').hide();
+			$('#catmob').show();
+		  }else{
+			$('#catmob').hide();
+			$('#catdesk').show();
+		  }
+		}).resize();
     </script>
 
     </head>
@@ -237,52 +249,71 @@ if(!empty($_GET['name'])){
 
         <div class="row">
 
-          <div class="col-md-3">
+          <div class="col-md-3" id="catdesk" style="display: none">
               <p class="lead">Movie Category</p>
               <div class="list-group">
-                <a href="sort.php?category=Action" class="list-group-item">Action</a>
-                <a href="sort.php?category=Adventure" class="list-group-item">Adventure</a>
-                <a href="sort.php?category=Animation" class="list-group-item">Animation</a>
-                <a href="sort.php?category=Comedy" class="list-group-item">Comedy</a>
-                <a href="sort.php?category=Drama" class="list-group-item">Drama</a>
-                <a href="sort.php?category=Thriller" class="list-group-item">Thriller</a>
-                <a href="sort.php?category=Crime" class="list-group-item">Crime</a>
-                <a href="sort.php?category=Music" class="list-group-item">Music</a>
-                <a href="sort.php?category=Romance" class="list-group-item">Romance</a>
-                <a href="sort.php?category=Sci-Fi" class="list-group-item">Sci-Fi</a>
+                <a href="sort.php?category=Action&page=1" class="list-group-item" id="Action">Action</a>
+                <a href="sort.php?category=Adventure&page=1" class="list-group-item" id="Adventure">Adventure</a>
+                <a href="sort.php?category=Animation&page=1" class="list-group-item" id="Animation">Animation</a>
+                <a href="sort.php?category=Comedy&page=1" class="list-group-item" id="Comedy">Comedy</a>
+                <a href="sort.php?category=Drama&page=1" class="list-group-item" id="Drama">Drama</a>
+                <a href="sort.php?category=Thriller&page=1" class="list-group-item" id="Thriller">Thriller</a>
+                <a href="sort.php?category=Crime&page=1" class="list-group-item" id="Crime">Crime</a>
+                <a href="sort.php?category=Music&page=1" class="list-group-item" id="Music">Music</a>
+                <a href="sort.php?category=Romance&page=1" class="list-group-item" id="Romance">Romance</a>
+                <a href="sort.php?category=Sci-Fi&page=1" class="list-group-item" id="Sci-Fi">Sci-Fi</a>
               </div>
           </div>
-            <p class="lead">&nbsp</p>
+		  <!--optimized for mobile-->
+          <div class="col-md-3" id="catmob" style="display: none">
+              <p class="lead">Movie Category</p>
+              <select class="form-control" id="Category">
+                <option value="empty" selected="selected">Select a Categoy</option>
+                <option value="sort.php?category=Action&page=1" class="list-group-item" id="Action">Action</option>
+                <option value="sort.php?category=Adventure&page=1" class="list-group-item" id="Adventure">Adventure</option>
+                <option value="sort.php?category=Animation&page=1" class="list-group-item" id="Animation">Animation</option>
+                <option value="sort.php?category=Comedy&page=1" class="list-group-item" id="Comedy">Comedy</option>
+                <option value="sort.php?category=Drama&page=1" class="list-group-item" id="Drama">Drama</option>
+                <option value="sort.php?category=Thriller&page=1" class="list-group-item" id="Thriller">Thriller</option>
+                <option value="sort.php?category=Crime&page=1" class="list-group-item" id="Crime">Crime</option>
+                <option value="sort.php?category=Music&page=1" class="list-group-item" id="Music">Music</option>
+                <option value="sort.php?category=Romance&page=1" class="list-group-item" id="Romance">Romance</option>
+                <option value="sort.php?category=Sci-Fi&page=1" class="list-group-item" id="Sci-Fi">Sci-Fi</option>
+              </select>
+          </div>
+          <!--add-->
+          <p class="lead">&nbsp</p>
             <div class="col-md-9">
                 <div class="thumbnail">
                     <div id="showCover">
                       <?php
-                      $con = mysqli_connect("localhost","#example","#example" , "#example");
+                      $con = mysqli_connect("localhost","root","root" , "root");
+                      $sql="SELECT * FROM Movies WHERE M_ID=$mmid";
                       $sql="SELECT * FROM Movies WHERE M_ID=$mmid";
                       $result = mysqli_query($con,$sql);
                       $mData = mysqli_fetch_array($result);
-                      echo "<img class='col-sm-4 poster' src=" . $mData['cover'] . ">";
-                      echo $mData['trailer'];
+                      echo "<img class='col-sm-4 poster' style='width: auto;height: 208px;' src=" . $mData['cover'] . ">";
+                      #echo $mData['trailer'];
+                      echo "<h3 id='movname'><strong>&nbsp" . $mData['title'] . "</strong><span>&nbsp&nbsp(" . $mData['m_year'] . ")</span></h3>";
+                      echo "<p><strong>&nbsp&nbspRelease Date:</strong> " . $mData['release_date'] . "<p>";
+                      echo "<p><strong>&nbsp&nbspDirector:</strong> " . $mData['director'] . "<p>";
+                      echo "<p><strong>&nbsp&nbspWriters:</strong> " . $mData['writers'] . "<p>";
+                      echo "<p><strong>&nbsp&nbspStars:</strong> " . $mData['stars'] . "<p>";
                        ?>
 
                     </div>
                     <div class="caption-full" style=" clear: left;">
 
                         <?php
-                        $con = mysqli_connect("localhost","#example","#example" , "#example");
+                        $con = mysqli_connect("localhost","root","root" , "root");
                         $sql="SELECT * FROM Movies WHERE M_ID=$mmid";
                         $result = mysqli_query($con,$sql);
                         $mData = mysqli_fetch_array($result);
-                        echo "<h4 id='movname'>" . $mData['title'] . "<span>&nbsp&nbsp(" . $mData['m_year'] . ")</span></h4>";
-                        echo "<p>Release Date: " . $mData['release_date'] . "<p>";
-                        echo "<p>Director: " . $mData['director'] . "<p>";
-                        echo "<p>Writers: " . $mData['writers'] . "<p>";
-                        echo "<p>Stars: " . $mData['stars'] . "<p>";
-                        echo "<p>Story Plot: " . $mData['storyline'] . "<p>";
+                        echo "<br /><p><strong>Story Plot:</strong> " . $mData['storyline'] . "<p>";
                          ?>
                         <div id="wlmsg">
                           <?php
-                          $con = mysqli_connect("localhost","#example","#example" , "#example");
+                          $con = mysqli_connect("localhost","root","root" , "root");
                           $username = $_COOKIE['movierating'];
                           $sql0="SELECT * FROM Users WHERE username = '$username'";
                           $result0= mysqli_query($con,$sql0);
@@ -307,7 +338,7 @@ if(!empty($_GET['name'])){
                     <div class="ratings">
                       <ul>
                           <?php
-                          $con = mysqli_connect("localhost","#example","#example" , "#example");
+                          $con = mysqli_connect("localhost","root","root" , "root");
                           $sql="SELECT * FROM Arating WHERE movie_ID = '$mmid'";
                           $result = mysqli_query($con,$sql);
                           $Arating_count = mysqli_num_rows($result);
@@ -349,10 +380,12 @@ if(!empty($_GET['name'])){
                         <h4 style="color: #d17581">Leave a Rating: </h4>
                     </div>
 
-                    <div class="ratingblock">
+                    <div class="ratingblock" align="center">
 
                     	<div class="ratingList row">
-                    		<div class="ratingtype">Acting：</div>
+                    		<div class="ratingtype" align="left">Acting：
+                            <span id="act" style= "color: #11BB2D;font-weight: bold;"></span>
+                        </div>
                     		<ul class="ratingcell">
                           <?php
                       			echo "<li id='1' onclick='getactingrating(this.id," . $mmid .")'>1</li>";
@@ -367,10 +400,12 @@ if(!empty($_GET['name'])){
                             echo "<li id='10' onclick='getactingrating(this.id," . $mmid .")'>10</li>";
                             ?>
                     		</ul>
-                        <span id="act" style= "color: #11BB2D;font-weight: bold;"></span>
+
                     	</div>
                       <div class="ratingList row">
-                        <div class="ratingtype">Story Plot: </div>
+                        <div class="ratingtype" align="left">Story Plot:
+                          <span id="splot" style= "color: #11BB2D;font-weight: bold;"></span>
+                        </div>
                         <ul class="ratingcell">
                         <?php
                           echo "<li id='1' onclick='getstoryrating(this.id," . $mmid .")'>1</li>";
@@ -385,10 +420,11 @@ if(!empty($_GET['name'])){
                           echo "<li id='10' onclick='getstoryrating(this.id," . $mmid .")'>10</li>";
                           ?>
                         </ul>
-                        <span id="splot" style= "color: #11BB2D;font-weight: bold;"></span>
                       </div>
                       <div class="ratingList row">
-                        <div class="ratingtype">Visual Effect: </div>
+                        <div class="ratingtype" align="left">Visual Effect:
+                          <span id="visual" style= "color: #11BB2D;font-weight: bold;"></span>
+                        </div>
                         <ul class="ratingcell">
                           <?php
                             echo "<li id='1' onclick='getvisualrating(this.id," . $mmid .")'>1</li>";
@@ -403,7 +439,6 @@ if(!empty($_GET['name'])){
                             echo "<li id='10' onclick='getvisualrating(this.id," . $mmid .")'>10</li>";
                             ?>
                         </ul>
-                        <span id="visual" style= "color: #11BB2D;font-weight: bold;"></span>
                       </div>
 
                     </div>
@@ -425,7 +460,8 @@ if(!empty($_GET['name'])){
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                  <p>Made and Designed by Linyao Meng and Menghua Liu 2016</p>
+                  <p style='font-size:80%;'>Made and Designed by Menghua Liu (Updated in 2017)</p>
+				  <p style='font-size:80%;'>Information courtesy of IMDb (http://www.imdb.com)</p>
                 </div>
             </div>
         </footer>
@@ -438,6 +474,15 @@ if(!empty($_GET['name'])){
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+      var movieCategory=document.getElementById('Category');
+      movieCategory.onchange=function() {
+        var op=this.options[this.selectedIndex];
+        if (op.value!="empty"){
+          window.open(op.value, "_self");
+        }
+      }
+    </script>
 
 </body>
 

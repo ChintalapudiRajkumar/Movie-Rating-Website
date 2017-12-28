@@ -12,15 +12,16 @@ $storyline = $_POST['storyline'];
 $mmid = $_POST['mmid'];
 // echo $year;
 
-$con = mysqli_connect("localhost","#example","#example" , "#example");
+$con = mysqli_connect("localhost","root","root" , "root");
 
 
 if($mmid === ""){
   // echo "empty";
-  $sql = "INSERT INTO Movies (title, Category, m_year, cover, trailer, director, stars, writers, release_date, storyline) VALUES ('$title', '$category', '$year', '$cover', '$trailer', '$director', '$stars', '$writers', '$release_date', '$storyline')";
-  $result = mysqli_query($con,$sql);
+	$sql = "INSERT INTO Movies (title, Category, m_year, cover, trailer, director, stars, writers, release_date, storyline) VALUES ('$title', '$category', '$year', '$cover', '$trailer', '$director', '$stars', '$writers', '$release_date', '$storyline')";
+  	$result = mysqli_query($con,$sql);
+	header("Location: managemovies.php?page=1");
   // echo $sql;
-  header("Location: index.php");
+
 }else{
   // echo $mmid;
   $sql = "UPDATE Movies SET title='$title', Category='$category', m_year=$year, cover='$cover', trailer='$trailer', director='$director', stars='$stars', writers='$writers', release_date='$release_date', storyline='$storyline' WHERE M_ID=$mmid;";

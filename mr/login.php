@@ -1,7 +1,7 @@
 <?php
 $username = $_POST['username'];
 $pw = $_POST['password'];
-$con = mysqli_connect("localhost","#example","#example" , "#example");
+$con = mysqli_connect("localhost","root","root" , "root");
 $sql="SELECT * FROM `Users` WHERE username = '$username'";
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result);

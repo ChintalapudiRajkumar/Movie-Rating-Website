@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,9 +10,22 @@
     <meta name="author" content="">
     <title>Movie Rating</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/movindex.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link href="css/movinfo.css" rel="stylesheet">
     <script src="js/functions.js"></script>
+	<script>
+    $(window).on("load resize", function () {
+      if($(window).width() < 995){
+        $('#catdesk').hide();
+        $('#catmob').show();
+        $('#mobsep').show();
+      }else{
+        $('#catmob').hide();
+        $('#catdesk').show();
+        $('#mobsep').hide();
+      }
+    }).resize();
+    </script>
     <style>
       ul.pagination {
           display: inline-block;
@@ -167,29 +179,47 @@
 
         <div class="row">
 
-            <div class="col-md-3">
-                <p class="lead">Movie Category</p>
-                <div class="list-group">
-                  <a href="sort.php?category=Action" class="list-group-item">Action</a>
-                  <a href="sort.php?category=Adventure" class="list-group-item">Adventure</a>
-                  <a href="sort.php?category=Animation" class="list-group-item">Animation</a>
-                  <a href="sort.php?category=Comedy" class="list-group-item">Comedy</a>
-                  <a href="sort.php?category=Drama" class="list-group-item">Drama</a>
-                  <a href="sort.php?category=Thriller" class="list-group-item">Thriller</a>
-                  <a href="sort.php?category=Crime" class="list-group-item">Crime</a>
-                  <a href="sort.php?category=Music" class="list-group-item">Music</a>
-                  <a href="sort.php?category=Romance" class="list-group-item">Romance</a>
-                  <a href="sort.php?category=Sci-Fi" class="list-group-item">Sci-Fi</a>
-                </div>
-            </div>
+          <div class="col-md-3" id="catdesk" style="display: none">
+              <p class="lead">Movie Category</p>
+              <div class="list-group">
+                <a href="sort.php?category=Action&page=1" class="list-group-item" id="Action">Action</a>
+                <a href="sort.php?category=Adventure&page=1" class="list-group-item" id="Adventure">Adventure</a>
+                <a href="sort.php?category=Animation&page=1" class="list-group-item" id="Animation">Animation</a>
+                <a href="sort.php?category=Comedy&page=1" class="list-group-item" id="Comedy">Comedy</a>
+                <a href="sort.php?category=Drama&page=1" class="list-group-item" id="Drama">Drama</a>
+                <a href="sort.php?category=Thriller&page=1" class="list-group-item" id="Thriller">Thriller</a>
+                <a href="sort.php?category=Crime&page=1" class="list-group-item" id="Crime">Crime</a>
+                <a href="sort.php?category=Music&page=1" class="list-group-item" id="Music">Music</a>
+                <a href="sort.php?category=Romance&page=1" class="list-group-item" id="Romance">Romance</a>
+                <a href="sort.php?category=Sci-Fi&page=1" class="list-group-item" id="Sci-Fi">Sci-Fi</a>
+              </div>
+          </div>
+		  <!--optimized for mobile-->
+          <div class="col-md-3" id="catmob" style="display: none">
+              <p class="lead">Movie Category</p>
+              <select class="form-control" id="Category">
+                <option value="empty" selected="selected">Select a Categoy</option>
+                <option value="sort.php?category=Action&page=1" class="list-group-item" id="Action">Action</option>
+                <option value="sort.php?category=Adventure&page=1" class="list-group-item" id="Adventure">Adventure</option>
+                <option value="sort.php?category=Animation&page=1" class="list-group-item" id="Animation">Animation</option>
+                <option value="sort.php?category=Comedy&page=1" class="list-group-item" id="Comedy">Comedy</option>
+                <option value="sort.php?category=Drama&page=1" class="list-group-item" id="Drama">Drama</option>
+                <option value="sort.php?category=Thriller&page=1" class="list-group-item" id="Thriller">Thriller</option>
+                <option value="sort.php?category=Crime&page=1" class="list-group-item" id="Crime">Crime</option>
+                <option value="sort.php?category=Music&page=1" class="list-group-item" id="Music">Music</option>
+                <option value="sort.php?category=Romance&page=1" class="list-group-item" id="Romance">Romance</option>
+                <option value="sort.php?category=Sci-Fi&page=1" class="list-group-item" id="Sci-Fi">Sci-Fi</option>
+              </select>
+          </div>
+		  <span id='mobsep'><br /><br /></span>
 
             <div class="col-md-9">
               <div class="row">
 
                   <p class="lead"><b>&nbsp&nbspYour Wishlist: </b></p>
                   <?php
-                  $page_num = $_GET['page'];
-                  $con = mysqli_connect("localhost","#example","#example" , "#example");
+                    $page_num = $_GET['page'];
+                    $con = mysqli_connect("localhost","root","root" , "root");
                     $username = $_COOKIE['movierating'];
                     $sql="SELECT * FROM Movies, Wishlist, Users WHERE movie_id = M_ID
                     AND user_id = U_ID AND username = '$username'";
@@ -200,10 +230,10 @@
                       $row = mysqli_fetch_array($result);
                       if($count > ($page_num-1)*6 && $count <= $page_num*6){
                         echo "<div class='col-sm-4 col-lg-4 col-md-4'>";
-                        echo "<div class='thumbnail'>";
+                        echo "<div class='thumbnail' style='height: 340px;display: table;width: 100%;'>";
                         $cover = $row['cover'];
                         $title = $row['title'];
-                        echo "<a href='movieinfo.php?name=" . $title . "'><img src='$cover' style='height: 380px;'></a>";
+                        echo "<a href='movieinfo.php?name=" . $title . "'><img src='$cover' style='max-height:270px;max-width:200px;'></a>";
                         echo "<div class='caption'>";
                         echo "<a href='movieinfo.php?name=" . $title . "'><center><p class='title'><strong>" . $title . "</strong></p></center></a>";
                         echo "</div></div></div>";
@@ -216,7 +246,7 @@
                 <div class="center">
                   <ul class="pagination">
                     <?php
-                      $con = mysqli_connect("localhost","#example","#example" , "#example");
+                      $con = mysqli_connect("localhost","root","root" , "root");
                       $username = $_COOKIE['movierating'];
                       $sql0="SELECT * FROM Users WHERE username = '$username'";
                       $result0= mysqli_query($con,$sql0);
@@ -249,7 +279,8 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                  <p>Made and Designed by Linyao Meng and Menghua Liu 2016</p>
+                  <p style='font-size:80%;'>Made and Designed by Menghua Liu (Updated in 2017)</p>
+				  <p style='font-size:80%;'>Information courtesy of IMDb (http://www.imdb.com)</p>
                 </div>
             </div>
         </footer>
@@ -262,6 +293,15 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+      var movieCategory=document.getElementById('Category');
+      movieCategory.onchange=function() {
+        var op=this.options[this.selectedIndex];
+        if (op.value!="empty"){
+          window.open(op.value, "_self");
+        }
+      }
+    </script>
 
 </body>
 

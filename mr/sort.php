@@ -14,6 +14,35 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/focus.js"></script>
     <script src="js/functions.js"></script>
+	<script>
+		$(window).on("load resize", function () {
+		  if($(window).width() < 995){
+			$('#catdesk').hide();
+			$('#catmob').show();
+			$('#mobsep').show();
+		  }else{
+			$('#catmob').hide();
+			$('#catdesk').show();
+			$('#mobsep').hide();
+		  }
+		}).resize();
+    </script>
+	<style>
+      ul.pagination {
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+      }
+
+      ul.pagination li {display: inline;}
+
+      ul.pagination li a {
+          color: black;
+          float: left;
+          padding: 8px 16px;
+          text-decoration: none;
+      }
+    </style>
 </head>
 
 <body>
@@ -152,56 +181,87 @@
 
         <div class="row">
 
-            <div class="col-md-3">
-                <p class="lead">Movie Category</p>
-                <div class="list-group">
-                  <a href="sort.php?category=Action" class="list-group-item" id="Action">Action</a>
-                  <a href="sort.php?category=Adventure" class="list-group-item" id="Adventure">Adventure</a>
-                  <a href="sort.php?category=Animation" class="list-group-item" id="Animation">Animation</a>
-                  <a href="sort.php?category=Comedy" class="list-group-item" id="Comedy">Comedy</a>
-                  <a href="sort.php?category=Drama" class="list-group-item" id="Drama">Drama</a>
-                  <a href="sort.php?category=Thriller" class="list-group-item" id="Thriller">Thriller</a>
-                  <a href="sort.php?category=Crime" class="list-group-item" id="Crime">Crime</a>
-                  <a href="sort.php?category=Music" class="list-group-item" id="Music">Music</a>
-                  <a href="sort.php?category=Romance" class="list-group-item" id="Romance">Romance</a>
-                  <a href="sort.php?category=Sci-Fi" class="list-group-item" id="Sci-Fi">Sci-Fi</a>
-                </div>
-            </div>
+          <div class="col-md-3" id="catdesk" style="display: none">
+              <p class="lead">Movie Category</p>
+              <div class="list-group">
+                <a href="sort.php?category=Action&page=1" class="list-group-item">Action</a>
+                <a href="sort.php?category=Adventure&page=1" class="list-group-item">Adventure</a>
+                <a href="sort.php?category=Animation&page=1" class="list-group-item">Animation</a>
+                <a href="sort.php?category=Comedy&page=1" class="list-group-item">Comedy</a>
+                <a href="sort.php?category=Drama&page=1" class="list-group-item">Drama</a>
+                <a href="sort.php?category=Thriller&page=1" class="list-group-item">Thriller</a>
+                <a href="sort.php?category=Crime&page=1" class="list-group-item">Crime</a>
+                <a href="sort.php?category=Music&page=1" class="list-group-item">Music</a>
+                <a href="sort.php?category=Romance&page=1" class="list-group-item">Romance</a>
+                <a href="sort.php?category=Sci-Fi&page=1" class="list-group-item">Sci-Fi</a>
+              </div>
+          </div>
+          <!--add-->
+          <div class="col-md-3" id="catmob" style="display: none">
+              <p class="lead">Movie Category</p>
+              <select class="form-control" id="Category">
+                <option value="empty" selected="selected">Select a Categoy</option>
+                <option value="sort.php?category=Action&page=1" class="list-group-item" id="Action">Action</option>
+                <option value="sort.php?category=Adventure&page=1" class="list-group-item" id="Adventure">Adventure</option>
+                <option value="sort.php?category=Animation&page=1" class="list-group-item" id="Animation">Animation</option>
+                <option value="sort.php?category=Comedy&page=1" class="list-group-item" id="Comedy">Comedy</option>
+                <option value="sort.php?category=Drama&page=1" class="list-group-item" id="Drama">Drama</option>
+                <option value="sort.php?category=Thriller&page=1" class="list-group-item" id="Thriller">Thriller</option>
+                <option value="sort.php?category=Crime&page=1" class="list-group-item" id="Crime">Crime</option>
+                <option value="sort.php?category=Music&page=1" class="list-group-item" id="Music">Music</option>
+                <option value="sort.php?category=Romance&page=1" class="list-group-item" id="Romance">Romance</option>
+                <option value="sort.php?category=Sci-Fi&page=1" class="list-group-item" id="Sci-Fi">Sci-Fi</option>
+              </select>
+          </div>
+          <!--add-->
+          <span id='mobsep'><br /><br /></span>
             <?php
-            $getcat = $_GET['category'];
-            echo "<p class='lead'>&nbsp&nbsp" . $getcat . " Movies: </p>";
-            echo "<div class='col-md-9'>";
-            $con = mysqli_connect("localhost","#example","#example" , "#example");
+              $getcat = $_GET['category'];
+			         $page_num = $_GET['page'];
+               echo "<p class='lead'>&nbsp&nbsp" . $getcat . " Movies: </p>";
+               echo "<div class='col-md-9'>";
+               $con = mysqli_connect("localhost","root","root" , "root");
                 $sql="SELECT * FROM Movies WHERE Category='$getcat'";
                 $result = mysqli_query($con,$sql);
                 $row_num = mysqli_num_rows($result);
-                while($row = mysqli_fetch_array($result)){
-                  echo "<table><tr>";
-                    echo "<td><div class='col-sm-3 col-md-3'>";
-                      $cover = $row['cover'];
-                      $title = $row['title'];
-                      echo "<a href='movieinfo.php?name=" . $title . "'><img src='$cover' style='width: 140px;height: 208px;'></a>";
-                    echo "</div></td>";
-                    echo "<td><div class='col-sm-12 col-md-12'>";
-                      echo "<h2><a href='movieinfo.php?name=" . $title . "'>" . $title . "</a></h2>";
-                      $director = $row['director'];
-                      $stars = $row['stars'];
-                      $writers = $row['writers'];
-                      $date = $row['release_date'];
-                      echo "<p>Director: " . $director . "</p>";
-                      echo "<p>Writers: " . $writers . "</p>";
-                      echo "<p>Stars: " . $stars . "</p>";
-                      echo "<p>Release Date: " . $date . "</p>";
-                    echo "</div></td>";
-                    echo "</tr>";
-                  echo "</table>";
-                  echo "<hr>";
+                $count=1;
+                while($count <= $row_num){
+				  $row = mysqli_fetch_array($result);
+				  if($count > ($page_num-1)*5 && $count <= $page_num*5){
+						echo "<table><tr>";
+						echo "<td><div class='col-sm-3 col-md-3'>";
+						  $cover = $row['cover'];
+						  $title = $row['title'];
+						  echo "<a href='movieinfo.php?name=" . $title . "'><img src='$cover' style='width: auto;height: 120px;'></a>";
+						echo "</div></td>";
+						echo "<td><div class='col-sm-12 col-md-12'>";
+						  echo "<h4><a href='movieinfo.php?name=" . $title . "'>" . $title . "</a></h4>";
+						  $director = $row['director'];
+						  $stars = $row['stars'];
+						  $writers = $row['writers'];
+						  $date = $row['release_date'];
+						  echo "<h5 style='font-size:80%;font-weight:normal;'><strong>Director</strong>: " . $director . "</h5>";
+						  echo "<h5 style='font-size:80%;font-weight:normal;'><strong>Writers</strong>: " . $writers . "</h5>";
+						  echo "<h5 style='font-size:80%;font-weight:normal;'><strong>Stars</strong>: " . $stars . "</h5>";
+						  echo "<h5 style='font-size:80%;font-weight:normal;'><strong>Release Date</strong>: " . $date . "</h5>";
+						echo "</div></td>";
+						echo "</tr>";
+					  echo "</table>";
+					  echo "<hr>";
+				  }
+				  $count++;
                 }
-            echo "</div>";
+				echo "<div class='center'><ul class='pagination'>";
+				for($i = 1; $i <= ceil($row_num/5); $i++){
+					echo"<li><a href='sort.php?category=" . $getcat . "&" . "page=" . $i ."'>". $i . "</a></li>";
+				  }
+				echo "</ul></div>";
+			  //div c9
+			  echo "</div>";
             ?>
 
-
-        </div>
+		</div>
+		<!-- /.row -->
 
     </div>
     <!-- /.container -->
@@ -214,7 +274,8 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                  <p>Made and Designed by Linyao Meng and Menghua Liu 2016</p>
+                  <p style='font-size:80%;'>Made and Designed by Menghua Liu (Updated in 2017)</p>
+				  <p style='font-size:80%;'>Information courtesy of IMDb (http://www.imdb.com)</p>
                 </div>
             </div>
         </footer>
@@ -227,6 +288,15 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+      var movieCategory=document.getElementById('Category');
+      movieCategory.onchange=function() {
+        var op=this.options[this.selectedIndex];
+        if (op.value!="empty"){
+          window.open(op.value, "_self");
+        }
+      }
+    </script>
 
 </body>
 

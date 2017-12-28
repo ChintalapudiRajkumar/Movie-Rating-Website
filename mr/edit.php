@@ -3,7 +3,7 @@ $mName ="";
 $mID = 0;
 if(!empty($_GET['name'])){
   $mName = $_GET['name'];
-  $con = mysqli_connect("localhost","#example","#example" , "#example");
+  $con = mysqli_connect("localhost","root","root" , "root");
   $sql="SELECT M_ID FROM Movies WHERE title='$mName'";
   $result = mysqli_query($con,$sql);
   $mData = mysqli_fetch_array($result);
@@ -31,30 +31,56 @@ if(!empty($_GET['name'])){
     <meta name="author" content="">
     <title>Movie Rating</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/movindex.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="css/movinfo.css" rel="stylesheet">
-    <link href="css/rating.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/functions.js"></script>
-    <style>
-     #storyplot{
-     height: 100px;
-     width: 500px;
-    }
-
-    #stars{
-      height: 38px;
-      width: 500px;
-    }
-    #cover{
-      height: 38px;
-      width: 500px;
-    }
-    #trailer{
-      height: 38px;
-      width: 500px;
-    }
-    </style>
+	<script>
+		$(window).on("load resize", function () {
+		  if($(window).width() < 995){
+			$('#catdesk').hide();
+			$('#catmob').show();
+			$('#mobsep').show();
+		  }else{
+			$('#catmob').hide();
+			$('#catdesk').show();
+			$('#mobsep').hide();
+		  }
+		}).resize();
+    </script>
+	<script>
+		function checktitle(){
+			var ctitle = document.getElementById("checkt").value;
+			if(ctitle==""){
+				alert("Movie title is a must!");
+				return false;
+			}
+		}
+	</script>
+	<style>
+		.updatetable{
+			width:100%;
+			padding-right:20px;
+			table-layout:auto;
+		}
+		.updatetable td textarea{
+			width: 100%;
+			word-wrap: break-word;
+    		word-break: break-all;
+		}
+		#storyplot{
+		 height: 100px;
+		}
+		#stars{
+		  height: 38px;
+		}
+		#cover{
+		  height: 38px;
+		}
+		#trailer{
+		  height: 38px;
+		}
+	</style>
 
     </head>
 
@@ -193,24 +219,42 @@ if(!empty($_GET['name'])){
 
         <div class="row">
 
-          <div class="col-md-3">
+          <div class="col-md-3" id="catdesk" style="display: none">
               <p class="lead">Movie Category</p>
               <div class="list-group">
-                <a href="sort.php?category=Action" class="list-group-item">Action</a>
-                <a href="sort.php?category=Adventure" class="list-group-item">Adventure</a>
-                <a href="sort.php?category=Animation" class="list-group-item">Animation</a>
-                <a href="sort.php?category=Comedy" class="list-group-item">Comedy</a>
-                <a href="sort.php?category=Drama" class="list-group-item">Drama</a>
-                <a href="sort.php?category=Thriller" class="list-group-item">Thriller</a>
-                <a href="sort.php?category=Crime" class="list-group-item">Crime</a>
-                <a href="sort.php?category=Music" class="list-group-item">Music</a>
-                <a href="sort.php?category=Romance" class="list-group-item">Romance</a>
-                <a href="sort.php?category=Sci-Fi" class="list-group-item">Sci-Fi</a>
+                <a href="sort.php?category=Action&page=1" class="list-group-item" id="Action">Action</a>
+                <a href="sort.php?category=Adventure&page=1" class="list-group-item" id="Adventure">Adventure</a>
+                <a href="sort.php?category=Animation&page=1" class="list-group-item" id="Animation">Animation</a>
+                <a href="sort.php?category=Comedy&page=1" class="list-group-item" id="Comedy">Comedy</a>
+                <a href="sort.php?category=Drama&page=1" class="list-group-item" id="Drama">Drama</a>
+                <a href="sort.php?category=Thriller&page=1" class="list-group-item" id="Thriller">Thriller</a>
+                <a href="sort.php?category=Crime&page=1" class="list-group-item" id="Crime">Crime</a>
+                <a href="sort.php?category=Music&page=1" class="list-group-item" id="Music">Music</a>
+                <a href="sort.php?category=Romance&page=1" class="list-group-item" id="Romance">Romance</a>
+                <a href="sort.php?category=Sci-Fi&page=1" class="list-group-item" id="Sci-Fi">Sci-Fi</a>
               </div>
           </div>
+		  <!--optimized for mobile-->
+          <div class="col-md-3" id="catmob" style="display: none">
+              <p class="lead">Movie Category</p>
+              <select class="form-control" id="Category">
+                <option value="empty" selected="selected">Select a Categoy</option>
+                <option value="sort.php?category=Action&page=1" class="list-group-item" id="Action">Action</option>
+                <option value="sort.php?category=Adventure&page=1" class="list-group-item" id="Adventure">Adventure</option>
+                <option value="sort.php?category=Animation&page=1" class="list-group-item" id="Animation">Animation</option>
+                <option value="sort.php?category=Comedy&page=1" class="list-group-item" id="Comedy">Comedy</option>
+                <option value="sort.php?category=Drama&page=1" class="list-group-item" id="Drama">Drama</option>
+                <option value="sort.php?category=Thriller&page=1" class="list-group-item" id="Thriller">Thriller</option>
+                <option value="sort.php?category=Crime&page=1" class="list-group-item" id="Crime">Crime</option>
+                <option value="sort.php?category=Music&page=1" class="list-group-item" id="Music">Music</option>
+                <option value="sort.php?category=Romance&page=1" class="list-group-item" id="Romance">Romance</option>
+                <option value="sort.php?category=Sci-Fi&page=1" class="list-group-item" id="Sci-Fi">Sci-Fi</option>
+              </select>
+          </div>
+		  <span id='mobsep'><br /><br /></span>
           <?php
           if($_SESSION['admin'] === 1){
-          $con = mysqli_connect("localhost","#example","#example" , "#example");
+            $con = mysqli_connect("localhost","root","root" , "root");
           $sql="SELECT * FROM Movies WHERE M_ID=$mmid";
           $result = mysqli_query($con,$sql);
           $mData = mysqli_fetch_array($result);
@@ -219,49 +263,59 @@ if(!empty($_GET['name'])){
 
 
             <div class="col-md-9">
-                <p class="lead"><b>&nbsp&nbspAdd a New Movie: </b></p>
+				<?php
+			   		if($mData['title']===null){
+			   			echo "<p class='lead'><b>&nbsp&nbsp Add a Movie: </b></p>";
+		   			}
+					else{
+						echo "<p class='lead'><b>&nbsp&nbsp Update Movie: <q>" . $mData['title'] . "</q></b></p>";
+					}
+			   	?>
                 <div class="thumbnail" style="background-color: #eaeef2;">
-                  <form method="POST" action="editMovieInfo.php">
-                  <table>
+                 <form action="/editMovieInfo.php" onsubmit="return checktitle()" method="POST">
+                  <table class="updatetable">
+					<col style="width: 20%">
+					<col style="width: 80%">
                     <tr>
                       <td>Title: </td>
-                      <td><input type="text" name="title" <?php echo "value='". $mData['title'] . "'"; ?>></td>
+					  <td><textarea name="title" rows="1" id="checkt"><?php echo $mData['title']?></textarea></td>
+					  <td id="titlehint"></td>
                     </tr>
                     <tr>
                       <td>Category: </td>
-                      <td><input type="text" name="category" <?php echo "value='". $mData['Category'] . "'"; ?>></td>
+                      <td><textarea name="category" rows="1"><?php echo $mData['Category']?></textarea></td>
                     </tr>
                     <tr>
                       <td>Year: </td>
-                      <td><input type="text" name="year" <?php echo "value='". $mData['m_year'] . "'"; ?>></td>
+                      <td><textarea name="year" rows="1"><?php echo $mData['m_year']?></textarea></td>
                     </tr>
                     <tr>
                       <td>Release date: </td>
-                      <td><input type="text" name="release_date" <?php echo "value='". $mData['release_date'] . "'"; ?>></td>
+                      <td><textarea name="release_date" rows="1"><?php echo $mData['release_date']?></textarea></td>
                     </tr>
                     <tr>
                       <td>Director: </td>
-                      <td><input type="text" name="director" <?php echo "value='". $mData['director'] . "'"; ?>></td>
+                      <td><textarea name="director" rows="1"><?php echo $mData['director']?></textarea></td>
                     </tr>
                     <tr>
                       <td>Writers: </td>
-                      <td><input type="text" name="writers" <?php echo "value='". $mData['writers'] . "'"; ?>></td>
+                      <td><textarea name="writers" rows="1"><?php echo $mData['writers']?></textarea></td>
                     </tr>
                     <tr>
                       <td>Stars: </td>
-                      <td><input type="text" id="stars" name="stars" <?php echo "value='". $mData['stars'] . "'"; ?>></td>
+                      <td><textarea name="stars" rows="2"><?php echo $mData['stars']?></textarea></td>
                     </tr>
                     <tr>
                       <td>Cover: </td>
-                      <td><input type="text" id="cover" name="cover" <?php echo "value='". $mData['cover'] . "'"; ?>></td>
+                      <td><textarea name="cover" rows="3"><?php echo $mData['cover']?></textarea></td>
                     </tr>
                     <tr>
                       <td>Trailer: </td>
-                      <td><input type="text" id="trailer" name="trailer" <?php echo "value='". $mData['trailer'] . "'"; ?>></td>
+                      <td><textarea name="trailer" rows="3"><?php echo $mData['trailer']?></textarea></td>
                     </tr>
                     <tr>
                       <td>Storyline: </td>
-                      <td><input type="text" id="storyplot" name="storyline" <?php echo "value='". $mData['storyline'] . "'"; ?>></td>
+                      <td><textarea name="storyline" rows="5"><?php echo $mData['storyline']?></textarea></td>
                     </tr>
                     <tr><td><input type='hidden' name='mmid' value='<?php echo "$mmid";?>'/></td></tr>
                     <?php
@@ -290,7 +344,8 @@ if(!empty($_GET['name'])){
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                  <p>Made and Designed by Linyao Meng and Menghua Liu 2016</p>
+                  <p style='font-size:80%;'>Made and Designed by Menghua Liu (Updated in 2017)</p>
+				  <p style='font-size:80%;'>Information courtesy of IMDb (http://www.imdb.com)</p>
                 </div>
             </div>
         </footer>
@@ -303,6 +358,15 @@ if(!empty($_GET['name'])){
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+      var movieCategory=document.getElementById('Category');
+      movieCategory.onchange=function() {
+        var op=this.options[this.selectedIndex];
+        if (op.value!="empty"){
+          window.open(op.value, "_self");
+        }
+      }
+    </script>
 
 </body>
 

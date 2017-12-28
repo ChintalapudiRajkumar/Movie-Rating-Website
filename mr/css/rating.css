@@ -1,15 +1,14 @@
 *{margin:0;padding:0;}
 ul{ list-style:none;}
- /*用户评分*/
 .ratingblock{
 	padding:15px 0;
-	width:600px;
+	width:100%;
 	margin-left: 20px;
   margin:0 auto;
 	}
 
 .ratingList{
-	width:600px;
+	width:100%;
 	padding-right:20px;
 	}
 .ratingtype{
@@ -19,7 +18,7 @@ ul{ list-style:none;}
 
 .ratingcell li{
 	float:left;
-	width:50px;
+	width: 10%;
 	height:30px;
 	text-align:center;
 	line-height:30px;
