@@ -6,6 +6,6 @@
 - Implemented efficient and flexible wish lists for registered users
 - Built back-end system for Admin users to update movie information using PHP and MySQL
 
-a
-b
-c
+a  
+b  
+c  
